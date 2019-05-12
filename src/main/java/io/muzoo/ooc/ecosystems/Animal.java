@@ -1,8 +1,9 @@
 package io.muzoo.ooc.ecosystems;
 
+import java.util.List;
 import java.util.Random;
 
-public class Animal {
+abstract public class Animal {
 
 
     // The age at which a fox can start to breed.
@@ -27,6 +28,7 @@ public class Animal {
     // The animal's position
     protected Location location;
 
+    public abstract void act(Field currentField, Field updatedField, List newAnimals);
 
 
 

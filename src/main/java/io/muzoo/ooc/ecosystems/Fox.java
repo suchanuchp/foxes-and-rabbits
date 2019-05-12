@@ -12,7 +12,6 @@ import java.util.Iterator;
  */
 public class Fox extends Animal{
 
-    // Characteristics shared by all foxes (static fields).
 
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
@@ -48,43 +47,6 @@ public class Fox extends Animal{
     }
 
 
-    /**
-     * This is what the fox does most of the time: it hunts for
-     * rabbits. In the process, it might breed, die of hunger,
-     * or die of old age.
-     *
-     * @param currentField The field currently occupied.
-     * @param updatedField The field to transfer to.
-     * @param newFoxes     A list to add newly born foxes to.
-     */
-    public void hunt(Field currentField, Field updatedField, List newFoxes) {
-        incrementAge();
-        incrementHunger();
-        if (alive) {
-            // New foxes are born into adjacent locations.
-            int births = breed();
-            for (int b = 0; b < births; b++) {
-                Fox newFox = new Fox(false);
-                newFoxes.add(newFox);
-                //System.out.println(location);
-                Location loc = updatedField.randomAdjacentLocation(location);
-                newFox.setLocation(loc);
-                updatedField.place(newFox, loc);
-            }
-            // Move towards the source of food if found.
-            Location newLocation = findFood(currentField, location);
-            if (newLocation == null) {  // no food found - move randomly
-                newLocation = updatedField.freeAdjacentLocation(location);
-            }
-            if (newLocation != null) {
-                setLocation(newLocation);
-                updatedField.place(this, newLocation);
-            } else {
-                // can neither move nor stay - overcrowding - all locations taken
-                alive = false;
-            }
-        }
-    }
 
 
 
@@ -122,8 +84,44 @@ public class Fox extends Animal{
         }
         return null;
     }
+    /**
+     * This is what the fox does most of the time: it hunts for
+     * rabbits. In the process, it might breed, die of hunger,
+     * or die of old age.
+     *
+     * @param currentField The field currently occupied.
+     * @param updatedField The field to transfer to.
+     * @param newFoxes     A list to add newly born foxes to.
+     */
 
 
-
-
+    @Override
+    public void act(Field currentField, Field updatedField, List newFoxes) {
+        incrementAge();
+        incrementHunger();
+        if (alive) {
+            // New foxes are born into adjacent locations.
+            int births = breed();
+            for (int b = 0; b < births; b++) {
+                Fox newFox = new Fox(false);
+                newFoxes.add(newFox);
+                //System.out.println(location);
+                Location loc = updatedField.randomAdjacentLocation(location);
+                newFox.setLocation(loc);
+                updatedField.place(newFox, loc);
+            }
+            // Move towards the source of food if found.
+            Location newLocation = findFood(currentField, location);
+            if (newLocation == null) {  // no food found - move randomly
+                newLocation = updatedField.freeAdjacentLocation(location);
+            }
+            if (newLocation != null) {
+                setLocation(newLocation);
+                updatedField.place(this, newLocation);
+            } else {
+                // can neither move nor stay - overcrowding - all locations taken
+                alive = false;
+            }
+        }
+    }
 }

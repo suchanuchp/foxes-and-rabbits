@@ -32,14 +32,29 @@ public class Rabbit extends Animal{
         }
     }
 
+
+
+
+    /**
+     * Tell the rabbit that it's dead now :(
+     */
+    public void setEaten() {
+        alive = false;
+    }
+
     /**
      * This is what the rabbit does most of the time - it runs
      * around. Sometimes it will breed or die of old age.
      *
      * @param updatedField The field to transfer to.
      * @param newRabbits   A list to add newly born rabbits to.
+     *
+     *
      */
-    public void run(Field updatedField, List newRabbits) {
+
+
+    @Override
+    public void act(Field currentField, Field updatedField, List newRabbits) {
         incrementAge();
         if (alive) {
             int births = breed();
@@ -61,15 +76,4 @@ public class Rabbit extends Animal{
             }
         }
     }
-
-
-
-
-    /**
-     * Tell the rabbit that it's dead now :(
-     */
-    public void setEaten() {
-        alive = false;
-    }
-
 }
