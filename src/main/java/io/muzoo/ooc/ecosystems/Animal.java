@@ -3,7 +3,7 @@ package io.muzoo.ooc.ecosystems;
 import java.util.List;
 import java.util.Random;
 
-abstract public class Animal {
+abstract public class Animal extends Actor{
 
 
     // A shared random number generator to control breeding.
@@ -13,9 +13,9 @@ abstract public class Animal {
     // Whether the animal is alive or not.
     protected boolean alive;
     // The animal's position
-    protected Location location;
 
-    public abstract void act(Field currentField, Field updatedField, List newAnimals);
+
+
 
     /**
      * Tell the animal that it's dead now :(
@@ -33,25 +33,6 @@ abstract public class Animal {
         return alive;
     }
 
-
-    /**
-     * Set the animal's location.
-     *
-     * @param row The vertical coordinate of the location.
-     * @param col The horizontal coordinate of the location.
-     */
-    public void setLocation(int row, int col) {
-        this.location = new Location(row, col);
-    }
-
-    /**
-     * Set the animal's location.
-     *
-     * @param location The animal's location.
-     */
-    public void setLocation(Location location) {
-        this.location = location;
-    }
 
 
 

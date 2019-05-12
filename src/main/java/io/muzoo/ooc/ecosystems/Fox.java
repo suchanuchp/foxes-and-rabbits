@@ -10,7 +10,7 @@ import java.util.Iterator;
  * @author David J. Barnes and Michael Kolling
  * @version 2002.10.28
  */
-public class Fox extends Carnivore{
+public class Fox extends Carnivore {
 
 
     // The food value of a single rabbit. In effect, this is the
@@ -20,9 +20,9 @@ public class Fox extends Carnivore{
     // The age to which a fox can live.
     private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    private static double BREEDING_PROBABILITY = 0.09;
+    private static double BREEDING_PROBABILITY = 0.11;
     // The maximum number of births.
-    private static int MAX_LITTER_SIZE = 3;
+    private static int MAX_LITTER_SIZE = 4;
     private static int FOOD_VALUE = 4;
 
 

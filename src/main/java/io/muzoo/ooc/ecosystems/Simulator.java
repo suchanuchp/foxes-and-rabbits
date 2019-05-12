@@ -71,6 +71,7 @@ public class Simulator {
         view.setColor(Fox.class, Color.blue);
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Tiger.class, Color.red);
+        view.setColor(Hunter.class, Color.black);
 
         // Setup a valid starting point.
         reset();
@@ -104,8 +105,8 @@ public class Simulator {
         newAnimals.clear();
 
         // let all animals act
-        for (Iterator<Animal> iter = animals.iterator(); iter.hasNext(); ) {
-            Animal animal = iter.next();
+        for (Iterator<Actor> iter = animals.iterator(); iter.hasNext(); ) {
+            Actor animal = iter.next();
             animal.act(field, updatedField, newAnimals);
 
         }
@@ -142,6 +143,7 @@ public class Simulator {
      * @param field The field to be populated.
      */
     private void populate(Field field) {
+        boolean existHunter = false;
         Random rand = new Random();
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
@@ -163,6 +165,13 @@ public class Simulator {
                     animals.add(rabbit);
                     rabbit.setLocation(row, col);
                     field.place(rabbit, row, col);
+                } else if(!existHunter){
+                    Hunter hunter = new Hunter();
+                    animals.add(hunter);
+                    hunter.setLocation(row,col);
+                    field.place(hunter, row, col);
+                    existHunter = true;
+
                 }
                 // else leave the location empty.
             }

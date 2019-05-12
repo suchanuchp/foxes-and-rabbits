@@ -19,7 +19,7 @@ public class Rabbit extends Animal{
     // The age to which a fox can live.
     private static final int MAX_AGE = 50;
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.15;
+    private static final double BREEDING_PROBABILITY = 0.19;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 5;
     /**
