@@ -15,12 +15,24 @@ public class Fox extends Animal{
 
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 4;
+    // The age at which a fox can start to breed.
+    private static final int BREEDING_AGE = 10;
+    // The age to which a fox can live.
+    private static final int MAX_AGE = 150;
+    // The likelihood of a fox breeding.
+    private static double BREEDING_PROBABILITY = 0.09;
+    // The maximum number of births.
+    private static int MAX_LITTER_SIZE = 3;
+    private static int FOOD_VALUE = 4;
+
+    private int foodLevel;
+    // The food value of a single rabbit. In effect, this is the
+    // number of steps a fox can go before it has to eat again.
 
     // Individual characteristics (instance fields).
 
     // The fox's food level, which is increased by eating rabbits.
-    private int foodLevel;
+
 
     /**
      * Create a fox. A fox can be created as a new born (age zero
@@ -30,19 +42,14 @@ public class Fox extends Animal{
      */
     public Fox(boolean randomAge) {
 
-        BREEDING_AGE = 10;
-        MAX_AGE = 150;
-        BREEDING_PROBABILITY = 0.09;
-        MAX_LITTER_SIZE = 3;
-
         age = 0;
         alive = true;
         if (randomAge) {
             age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
+            foodLevel = rand.nextInt(FOOD_VALUE);
         } else {
             // leave age at 0
-            foodLevel = RABBIT_FOOD_VALUE;
+            foodLevel = FOOD_VALUE;
         }
     }
 
@@ -53,12 +60,7 @@ public class Fox extends Animal{
     /**
      * Make this fox more hungry. This could result in the fox's death.
      */
-    private void incrementHunger() {
-        foodLevel--;
-        if (foodLevel <= 0) {
-            alive = false;
-        }
-    }
+
 
     /**
      * Tell the fox to look for rabbits adjacent to its current location.
@@ -67,7 +69,7 @@ public class Fox extends Animal{
      * @param location Where in the field it is located.
      * @return Where food was found, or null if it wasn't.
      */
-    private Location findFood(Field field, Location location) {
+    protected Location findFood(Field field, Location location) {
         Iterator adjacentLocations =
                 field.adjacentLocations(location);
         while (adjacentLocations.hasNext()) {
@@ -77,7 +79,7 @@ public class Fox extends Animal{
                 Rabbit rabbit = (Rabbit) animal;
                 if (rabbit.isAlive()) {
                     rabbit.setEaten();
-                    foodLevel = RABBIT_FOOD_VALUE;
+                    foodLevel = FOOD_VALUE;
                     return where;
                 }
             }
@@ -115,13 +117,48 @@ public class Fox extends Animal{
             if (newLocation == null) {  // no food found - move randomly
                 newLocation = updatedField.freeAdjacentLocation(location);
             }
-            if (newLocation != null) {
+            else if (newLocation != null) {
                 setLocation(newLocation);
                 updatedField.place(this, newLocation);
             } else {
                 // can neither move nor stay - overcrowding - all locations taken
                 alive = false;
             }
+        }
+    }
+    /**
+     * Generate a number representing the number of births,
+     * if it can breed.
+     *
+     * @return The number of births (may be zero).
+     */
+    private int breed() {
+        int births = 0;
+        if (canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+        }
+        return births;
+    }
+
+    /**
+     * An animal can breed if it has reached the breeding age.
+     */
+    private boolean canBreed() {
+        return age >= BREEDING_AGE;
+    }
+    /**
+     * Increase the age. This could result in the animal's death.
+     */
+    private void incrementAge() {
+        age++;
+        if (age > MAX_AGE) {
+            alive = false;
+        }
+    }
+        protected void incrementHunger() {
+        foodLevel--;
+        if (foodLevel <= 0) {
+            alive = false;
         }
     }
 }

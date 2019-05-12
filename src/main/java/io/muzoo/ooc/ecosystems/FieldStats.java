@@ -32,7 +32,7 @@ public class FieldStats {
      * @return A string describing what animals are in the field.
      */
     public String getPopulationDetails(Field field) {
-        int i =0;
+
         StringBuffer buffer = new StringBuffer();
         if (!countsValid) {
             generateCounts(field);
@@ -45,8 +45,8 @@ public class FieldStats {
             buffer.append(": ");
             buffer.append(info.getCount());
             buffer.append(' ');
-            i++;
-            //if(i%2==0) System.out.println();
+
+
         }
         return buffer.toString();
     }

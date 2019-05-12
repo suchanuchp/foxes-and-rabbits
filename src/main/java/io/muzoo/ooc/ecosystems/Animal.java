@@ -6,21 +6,8 @@ import java.util.Random;
 abstract public class Animal {
 
 
-    // The age at which a fox can start to breed.
-    protected static int BREEDING_AGE;
-    // The age to which a fox can live.
-    protected static int MAX_AGE;
-    // The likelihood of a fox breeding.
-    protected static double BREEDING_PROBABILITY;
-    // The maximum number of births.
-    protected static int MAX_LITTER_SIZE;
-    // The food value of a single rabbit. In effect, this is the
-    // number of steps a fox can go before it has to eat again.
-
     // A shared random number generator to control breeding.
     protected static final Random rand = new Random();
-
-
     // The animal's age.
     protected int age;
     // Whether the animal is alive or not.
@@ -30,38 +17,11 @@ abstract public class Animal {
 
     public abstract void act(Field currentField, Field updatedField, List newAnimals);
 
-
-
     /**
-     * Increase the age. This could result in the animal's death.
+     * Tell the animal that it's dead now :(
      */
-    protected void incrementAge() {
-        age++;
-        if (age > MAX_AGE) {
-            alive = false;
-        }
-    }
-
-
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     *
-     * @return The number of births (may be zero).
-     */
-    protected int breed() {
-        int births = 0;
-        if (canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
-
-    /**
-     * An animal can breed if it has reached the breeding age.
-     */
-    protected boolean canBreed() {
-        return age >= BREEDING_AGE;
+    public void setEaten() {
+        alive = false;
     }
 
     /**
