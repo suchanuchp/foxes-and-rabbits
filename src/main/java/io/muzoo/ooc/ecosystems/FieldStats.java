@@ -41,7 +41,7 @@ public class FieldStats {
         while (keys.hasNext()) {
             Counter info = (Counter) counters.get(keys.next());
             buffer.append(info.getName());
-            //System.out.println(info.getName()+": "+info.getCount());
+            System.out.println(info.getName()+": "+info.getCount());
             buffer.append(": ");
             buffer.append(info.getCount());
             buffer.append(' ');

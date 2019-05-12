@@ -22,7 +22,6 @@ public class Rabbit extends Animal{
     private static final double BREEDING_PROBABILITY = 0.15;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 5;
-    private static final int FOOD_VALUE = 4;
     /**
      * Create a new rabbit. A rabbit may be created with age
      * zero (a new born) or with a random age.
@@ -30,8 +29,6 @@ public class Rabbit extends Animal{
      * @param randomAge If true, the rabbit will have a random age.
      */
     public Rabbit(boolean randomAge) {
-
-
         age = 0;
         alive = true;
         if (randomAge) {

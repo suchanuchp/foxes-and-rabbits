@@ -70,7 +70,7 @@ public class Simulator {
         view = new SimulatorView(depth, width);
         view.setColor(Fox.class, Color.blue);
         view.setColor(Rabbit.class, Color.orange);
-        //view.setColor(Tiger.class, Color.red);
+        view.setColor(Tiger.class, Color.red);
 
         // Setup a valid starting point.
         reset();
@@ -147,13 +147,13 @@ public class Simulator {
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
 
-//                if (rand.nextDouble() <= TIGER_CREATION_PROBABILITY) {
-//                    Tiger tiger = new Tiger(true);
-//                    animals.add(tiger);
-//                    tiger.setLocation(row, col);
-//                    field.place(tiger, row, col);
-//                }
-                if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                if (rand.nextDouble() <= TIGER_CREATION_PROBABILITY) {
+                    Tiger tiger = new Tiger(true);
+                    animals.add(tiger);
+                    tiger.setLocation(row, col);
+                    field.place(tiger, row, col);
+                }
+                else if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Fox fox = new Fox(true);
                     animals.add(fox);
                     fox.setLocation(row, col);

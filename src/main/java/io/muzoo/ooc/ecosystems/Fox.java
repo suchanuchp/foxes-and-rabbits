@@ -10,7 +10,7 @@ import java.util.Iterator;
  * @author David J. Barnes and Michael Kolling
  * @version 2002.10.28
  */
-public class Fox extends Animal{
+public class Fox extends Carnivore{
 
 
     // The food value of a single rabbit. In effect, this is the
@@ -25,7 +25,7 @@ public class Fox extends Animal{
     private static int MAX_LITTER_SIZE = 3;
     private static int FOOD_VALUE = 4;
 
-    private int foodLevel;
+
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
 
@@ -117,7 +117,7 @@ public class Fox extends Animal{
             if (newLocation == null) {  // no food found - move randomly
                 newLocation = updatedField.freeAdjacentLocation(location);
             }
-            else if (newLocation != null) {
+            if (newLocation != null) {
                 setLocation(newLocation);
                 updatedField.place(this, newLocation);
             } else {
@@ -155,10 +155,5 @@ public class Fox extends Animal{
             alive = false;
         }
     }
-        protected void incrementHunger() {
-        foodLevel--;
-        if (foodLevel <= 0) {
-            alive = false;
-        }
-    }
+
 }
