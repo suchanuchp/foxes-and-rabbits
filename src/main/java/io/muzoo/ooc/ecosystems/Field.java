@@ -102,6 +102,7 @@ public class Field {
     public Location randomAdjacentLocation(Location location) {
         int row = location.getRow();
         int col = location.getCol();
+        //System.out.println("ROw "+ row);
         // Generate an offset of -1, 0, or +1 for both the current row and col.
         int nextRow = row + rand.nextInt(3) - 1;
         int nextCol = col + rand.nextInt(3) - 1;
