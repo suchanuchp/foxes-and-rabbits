@@ -22,7 +22,7 @@ public class Fox extends Carnivore {
     // The likelihood of a fox breeding.
     private static double BREEDING_PROBABILITY = 0.11;
     // The maximum number of births.
-    private static int MAX_LITTER_SIZE = 4;
+    private static int MAX_LITTER_SIZE = 6;
     private static int FOOD_VALUE = 4;
 
 
