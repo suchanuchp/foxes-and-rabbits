@@ -117,7 +117,7 @@ public class Simulator {
         updatedField.clear();
 
         // display the new field on screen
-        view.showStatus(step, field);
+        view.update(step, field);
     }
 
     /**
@@ -131,7 +131,7 @@ public class Simulator {
         populate(field);
 
         // Show the starting state in the view.
-        view.showStatus(step, field);
+        view.update(step, field);
     }
 
     /**

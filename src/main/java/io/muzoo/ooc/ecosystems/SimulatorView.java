@@ -15,7 +15,7 @@ import java.util.HashMap;
  * @author David J. Barnes and Michael Kolling
  * @version 2003.12.22
  */
-public class SimulatorView extends JFrame {
+public class SimulatorView extends JFrame implements SimulatorObserver{
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
 
@@ -84,7 +84,7 @@ public class SimulatorView extends JFrame {
      * @param step  Which iteration step it is.
      * @param field The field whose status is to be displayed.
      */
-    public void showStatus(int step, Field field) {
+    public void update(int step, Field field) {
         if (!isVisible())
             setVisible(true);
 
@@ -118,6 +118,7 @@ public class SimulatorView extends JFrame {
     public boolean isViable(Field field) {
         return stats.isViable(field);
     }
+
 
     /**
      * Provide a graphical view of a rectangular field. This is
